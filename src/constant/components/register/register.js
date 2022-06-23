@@ -31,10 +31,24 @@ function Register({ navigation }) {
     const { state, dispatch } = useContext(Context);
 
     const createNewUser = () => {
-        if (email.length == 0 || email.length < 5 || password.length == 0) {
+        if (email.length == 0) {
             Alert.alert('Warning', 'Please write your data')
             dispatch({ type: "LOGIN", payload: false })
-        } else {
+        } else if
+            (email.length < 5) {
+            Alert.alert('Warning', 'Please enter a properly email address.')
+            dispatch({ type: "LOGIN", payload: false })
+        }
+        else if
+            (email.length > 5 && password.length === 0) {
+            Alert.alert('Warning', 'Please write a password.')
+            dispatch({ type: "LOGIN", payload: false })
+        }
+        else if
+            (email === state.email) {
+            Alert.alert('Sorry', 'This email address is taken!');
+        }
+        else {
             dispatch({ type: "SET_EMAIL", payload: email })
             dispatch({ type: "SET_PASSWORD", payload: password })
             dispatch({ type: "LOGIN", payload: true })
