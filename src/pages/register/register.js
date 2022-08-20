@@ -22,6 +22,7 @@ import {
 import MyButton from '../common/myButton/myButton';
 import MyTextInput from '../common/myTextInput/myTextInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { emailAction, loginAction, passwordAction } from '../../actions';
 
 const height = Dimensions.get('window').height;
 
@@ -31,27 +32,21 @@ function Register({ navigation }) {
     const { state, dispatch } = useContext(Context);
 
     const createNewUser = () => {
-        if (email.length == 0) {
-            Alert.alert('Warning', 'Please write your data')
-            dispatch({ type: "LOGIN", payload: false })
+        var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        if (!email.match(pattern)) {
+            Alert.alert('Warning', 'Please write a valid email address')
         } else if
-            (email.length < 5) {
-            Alert.alert('Warning', 'Please enter a properly email address.')
-            dispatch({ type: "LOGIN", payload: false })
-        }
-        else if
-            (email.length > 5 && password.length === 0) {
-            Alert.alert('Warning', 'Please write a password.')
-            dispatch({ type: "LOGIN", payload: false })
+            (password.length === 0 || password.length < 6) {
+            Alert.alert('Warning', 'Please write a password more than 6 characters.')
         }
         else if
             (email === state.email) {
             Alert.alert('Sorry', 'This email address is taken!');
         }
         else {
-            dispatch({ type: "SET_EMAIL", payload: email })
-            dispatch({ type: "SET_PASSWORD", payload: password })
-            dispatch({ type: "LOGIN", payload: true })
+            dispatch(emailAction(email))
+            dispatch(passwordAction(password))
+            dispatch(loginAction())
         }
 
     }

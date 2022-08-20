@@ -5,10 +5,10 @@ import {
     Platform,
     StatusBar,
     StyleSheet,
+    Linking,
     Dimensions,
     Alert
 } from 'react-native';
-import Context from '../../../context/store/userStore';
 import {
     APP_COLOR,
     SECONDARY_COLOR,
@@ -17,32 +17,31 @@ import {
     TEXT_FONT_SIZE,
     TITLE_FONT,
     TITLE_FONT_SIZE
-} from '../../commonStyle';
-import MyButton from '../common/myButton/myButton';
-import MyTextInput from '../common/myTextInput/myTextInput';
+} from '../../constant/commonStyle';
+import MyButton from '../../constant/components/common/myButton/myButton';
+import MyTextInput from '../../constant/components/common/myTextInput/myTextInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const height = Dimensions.get('window').height;
 
-function Login({ navigation }) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [isLoggedIn, setIsLoggedIn] = useState();
-    const { state, dispatch } = useContext(Context);
 
-    const userLogin = () => {
-        if (email.length == 0 || email.length < 5 || password.length == 0 || email != state.email || password != state.password) {
-            Alert.alert('Opps!', 'Something is wrong. Please check your data')
-            dispatch({ type: "LOGIN", payload: false })
+function ForgotPassword({ navigation }) {
+    const [email, setEmail] = useState('')
+    const { state } = useContext(Context);
+
+    const passwordControl = () => {
+        var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        if (!email.match(pattern)) {
+            Alert.alert('Opps!', 'Please, write a valid email')
         }
-        else {
-            (email === state.email && password === state.password)
-            dispatch({ type: "SET_EMAIL", payload: email })
-            dispatch({ type: "SET_PASSWORD", payload: password })
-            dispatch({ type: "LOGIN", payload: true })
+        else if (email != state.email) {
+            Alert.alert('Check please', 'Email address was not found')
+        } else {
+            (email === state.email)
+            Alert.alert('Your password', state.password)
         }
     }
-
 
     return (
         <KeyboardAwareScrollView
@@ -51,48 +50,32 @@ function Login({ navigation }) {
             style={style.container}>
             <View style={style.wrapper}>
                 <View style={style.titleBox}>
-                    <Text style={style.title}>Welcome back</Text>
-                    <Text style={style.titleBottomText}>User info coming from Context API</Text>
-                    <Text style={style.titleBottomText}>{state.email}</Text>
-                    <Text style={style.titleBottomText}>{state.password}</Text>
-
-
+                    <Text style={style.title}>Forgot Password</Text>
+                    <Text style={style.titleBottomText}>After entering your email address,</Text>
+                    <Text style={style.titleBottomText}>we will show your password.</Text>
                 </View>
                 <View style={style.secondBox}>
                     <View>
                         <MyTextInput
                             placeholder={'Email address'}
                             name={'mail'}
-                            secureTextEntry={false}
                             keyboardType={'email-address'}
                             value={email}
-                            onChangeText={(text) =>
+                            onChangeText={(text) => {
                                 setEmail(text)
-                            }
-                        />
-                    </View>
-                    <View style={style.bottom}>
-                        <MyTextInput
-                            placeholder={'Password'}
-                            keyboardType={'default'}
-                            name={'lock'}
-                            secureTextEntry={true}
-                            value={password}
-                            onChangeText={(text) =>
-                                setPassword(text)
-                            }
+                            }}
                         />
                     </View>
                     <View style={style.bottom}>
                         <MyButton
-                            text={'Login to my account'}
-                            onPress={userLogin}
+                            text={'Submit'}
+                            onPress={passwordControl}
                         />
                     </View>
 
                     <View style={style.textBox}>
-                        <Text style={style.text} onPress={() => navigation.navigate('ForgotPassword')}>
-                            Forgot my password
+                        <Text style={style.text} onPress={() => Linking.openURL('https://www.instagram.com/aboutpersonalstuff/')}>
+                            Support request
                         </Text>
                     </View>
                 </View>
@@ -100,7 +83,6 @@ function Login({ navigation }) {
         </KeyboardAwareScrollView>
     );
 };
-
 
 const style = StyleSheet.create({
     container: {
@@ -119,7 +101,8 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
-        paddingTop: '10%',
+        paddingTop: '15%',
+        paddingBottom: '5%'
     },
     title: {
         fontSize: TITLE_FONT_SIZE,
@@ -130,13 +113,16 @@ const style = StyleSheet.create({
     titleBottomText: {
         fontSize: TEXT_FONT_SIZE,
         fontFamily: TEXT_FONT,
-        color: APP_COLOR,
     },
     secondBox: {
+        flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
-        marginTop: '10%',
+        paddingTop: '70%',
         height: height * .6,
+    },
+    errorMessage: {
+        color: APP_COLOR,
     },
     bottom: {
         marginTop: 14,
@@ -152,7 +138,6 @@ const style = StyleSheet.create({
         fontSize: SMALL_TEXT_FONT_SIZE,
         fontFamily: TEXT_FONT,
     },
-
 });
 
-export default Login;
+export default ForgotPassword;

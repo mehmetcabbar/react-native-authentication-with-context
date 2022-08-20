@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
     View,
     Text,
@@ -13,15 +13,14 @@ import {
     SMALL_TEXT_FONT_SIZE,
     TEXT_FONT, TITLE_FONT,
     TITLE_FONT_SIZE
-} from '../../commonStyle';
+} from '../../constant/commonStyle';
 import LoginImage from '../../images/logoIcon.svg';
-import MyButton from '../common/myButton/myButton';
-import MyWhiteButton from '../common/myWhiteButton/myWhiteButton';
-import Context from '../../../context/store/userStore';
+import MyButton from '../../constant/components/common/myButton/myButton';
+import MyWhiteButton from '../../constant/components/common/myWhiteButton/myWhiteButton';
+import Context from '../../context/store/userStore';
 
 function Welcome({ navigation }) {
     const { state, dispatch } = useContext(Context)
-
 
     return (
         <SafeAreaView style={style.container}>
@@ -31,7 +30,6 @@ function Welcome({ navigation }) {
                     <Text style={style.title}>AuthSteps</Text>
                     <Text></Text>
                 </View>
-
                 <View style={style.secondBox}>
                     <MyButton
                         text={'I am new here'}
@@ -102,7 +100,6 @@ const style = StyleSheet.create({
     textUnderline: {
         textDecorationLine: 'underline',
     }
-
 });
 
 export default Welcome;

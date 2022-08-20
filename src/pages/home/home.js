@@ -1,20 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { View, Text, SafeAreaView, Platform, StatusBar, StyleSheet, ImageBackground, Linking } from 'react-native';
-import Context from '../../../context/store/userStore';
-import { APP_COLOR, SECONDARY_COLOR, SMALL_TEXT_FONT_SIZE, TEXT_FONT, TEXT_FONT_SIZE, TITLE_FONT, TITLE_FONT_SIZE } from '../../commonStyle';
-import MyButton from '../common/myButton/myButton';
+import React, { useContext } from 'react';
+import { View, Text, SafeAreaView, Platform, StatusBar, StyleSheet } from 'react-native';
+import Context from '../../context/store/userStore';
+import { APP_COLOR, SECONDARY_COLOR, TEXT_FONT, TEXT_FONT_SIZE, TITLE_FONT, TITLE_FONT_SIZE } from '../../constant/commonStyle';
+import MyButton from '../../constant/components/common/myButton/myButton';
 import Avatar from '../../images/avatar.svg';
 import FirstBubble from '../../images/firstBubbleForEmail.svg';
 import SecondBuble from '../../images/secondBubbleForMyEmail.svg';
-
+import { logoutAction } from '../../actions';
 
 
 function Home({ navigation }) {
     const { state, dispatch } = useContext(Context);
-    const [isLoggedIn, setIsLoggedIn] = useState('');
 
     const logOut = ({ navigation }) => {
-        dispatch({ type: "LOGOUT", payload: false })
+        dispatch(logoutAction())
     }
 
 
@@ -23,8 +22,7 @@ function Home({ navigation }) {
             <View style={style.wrapper}>
                 <View style={style.imageBox}>
                     <Avatar />
-                    <Text style={style.title}>It’s done</Text>
-                    <Text style={{ color: 'black' }}></Text>
+                    <Text style={style.title}>It is done</Text>
                     <Text style={style.titleBottomText}>I am very happy that you have </Text>
                     <Text style={style.titleBottomText}>completed all the steps.</Text>
                 </View>
@@ -115,7 +113,5 @@ const style = StyleSheet.create({
     }
 
 });
-
-
 
 export default Home;

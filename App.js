@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
-import Navigation from './src/constant/components/navigation/navigation';
 import Provider from './src/context/provider/userProvider';
+import Navigation from './src/pages/navigation/navigation';
 
 
 

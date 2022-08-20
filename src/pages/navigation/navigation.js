@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../home/home';
@@ -6,11 +6,9 @@ import Welcome from '../welcome/welcomeScreen';
 import Register from '../register/register';
 import Login from '../login/login';
 import ForgotPassword from '../forgotPassword/forgotPassword';
-import { SECONDARY_COLOR } from '../../commonStyle';
-import CustomHeaderLeft from '../common/customHeaderLeft/customHeaderLeft';
-import Context from '../../../context/store/userStore';
-
-
+import { SECONDARY_COLOR } from '../../constant/commonStyle';
+import CustomHeaderLeft from '../../constant/components/common/customHeaderLeft/customHeaderLeft';
+import Context from '../../context/store/userStore';
 
 
 export default Navigation = ({ navigation }) => {
@@ -24,9 +22,6 @@ export default Navigation = ({ navigation }) => {
                             <Stack.Screen
                                 options={({ navigation, route }) => ({
                                     headerTitle: '',
-                                    // headerLeft: () => (
-                                    //     <CustomHeaderLeft onPress={() => navigation.goBack(null)} />
-                                    // ),
                                     headerTransparent: false,
                                     headerShadowVisible: false,
                                     headerStyle: {
