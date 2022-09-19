@@ -3,9 +3,9 @@ import { View, Text, SafeAreaView, Platform, StatusBar, StyleSheet } from 'react
 import Context from '../../context/store/userStore';
 import { APP_COLOR, SECONDARY_COLOR, TEXT_FONT, TEXT_FONT_SIZE, TITLE_FONT, TITLE_FONT_SIZE } from '../../constant/commonStyle';
 import MyButton from '../../constant/components/common/myButton/myButton';
-import Avatar from '../../images/avatar.svg';
-import FirstBubble from '../../images/firstBubbleForEmail.svg';
-import SecondBuble from '../../images/secondBubbleForMyEmail.svg';
+import Avatar from '../../constant/images/avatar.svg';
+import FirstBubble from '../../constant/images/firstBubbleForEmail.svg';
+import SecondBuble from '../../constant/images/secondBubbleForMyEmail.svg';
 import { logoutAction } from '../../actions';
 
 

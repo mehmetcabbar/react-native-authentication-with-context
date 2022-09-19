@@ -9,7 +9,7 @@ import {
     Dimensions,
     Alert
 } from 'react-native';
-import Context from '../../../context/store/userStore';
+import Context from '../../context/store/userStore';
 import {
     APP_COLOR,
     SECONDARY_COLOR,
@@ -18,9 +18,9 @@ import {
     TEXT_FONT_SIZE,
     TITLE_FONT,
     TITLE_FONT_SIZE
-} from '../../commonStyle';
-import MyButton from '../common/myButton/myButton';
-import MyTextInput from '../common/myTextInput/myTextInput';
+} from '../../constant/commonStyle';
+import MyButton from '../../constant/components/common/myButton/myButton';
+import MyTextInput from '../../constant/components/common/myTextInput/myTextInput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { emailAction, loginAction, passwordAction } from '../../actions';
 

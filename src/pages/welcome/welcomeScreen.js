@@ -14,7 +14,7 @@ import {
     TEXT_FONT, TITLE_FONT,
     TITLE_FONT_SIZE
 } from '../../constant/commonStyle';
-import LoginImage from '../../images/logoIcon.svg';
+import LoginImage from '../../constant/images/logoIcon.svg';
 import MyButton from '../../constant/components/common/myButton/myButton';
 import MyWhiteButton from '../../constant/components/common/myWhiteButton/myWhiteButton';
 import Context from '../../context/store/userStore';
